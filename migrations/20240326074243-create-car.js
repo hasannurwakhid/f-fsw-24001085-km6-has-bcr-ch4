@@ -11,21 +11,47 @@ module.exports = {
         defaultValue: Sequelize.INTEGER,
         type: Sequelize.INTEGER,
       },
-      name: {
+      model: {
         allowNull: false,
         type: Sequelize.STRING,
+      },
+      manufactur_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      image: {
+        allowNull: true,
+        type: Sequelize.TEXT,
       },
       rent_day: {
         allowNull: false,
         type: Sequelize.BIGINT,
       },
-      size: {
+      description: {
         allowNull: false,
-        type: Sequelize.STRING,
-      },
-      photo: {
-        allowNull: true,
         type: Sequelize.TEXT,
+      },
+      // transmission_id: {
+      //   allowNull: false,
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: {
+      //       tableName: "transmissions",
+      //     },
+      //     key: "id",
+      //   },
+      // },
+      // type_id: {
+      //   allowNull: false,
+      //   type: Sequelize.INTEGER,
+      // },
+      year: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      capacity: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
