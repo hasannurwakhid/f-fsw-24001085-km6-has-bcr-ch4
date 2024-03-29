@@ -5,7 +5,11 @@ const { getData, setData, deleteData } = require("../../helper/redis");
 // const path = require("path");
 
 exports.getTransmissions = async () => {
-  const data = await transmission.findAll();
+  const data = await transmission.findAll({
+    include: {
+      model: car,
+    },
+  });
   return data;
 };
 

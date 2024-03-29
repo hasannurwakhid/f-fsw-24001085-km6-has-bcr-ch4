@@ -5,7 +5,11 @@ const { getData, setData, deleteData } = require("../../helper/redis");
 // const path = require("path");
 
 exports.getManufactures = async () => {
-  const data = await manufacture.findAll();
+  const data = await manufacture.findAll({
+    include: {
+      model: car,
+    },
+  });
   return data;
 };
 

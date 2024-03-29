@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       option_transaction.belongsTo(models.option, { foreignKey: "option_id" });
-      option_transaction.belongsTo(models.option, { foreignKey: "car_id" });
+      option_transaction.belongsTo(models.car, { foreignKey: "car_id" });
     }
   }
   option_transaction.init(

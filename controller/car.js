@@ -121,6 +121,8 @@ exports.updateCar = async (req, res, next) => {
       type_id,
       manufacture_id,
     } = req.body;
+    const { image } = req.files;
+
     if (!model || model == "") {
       return next({
         message: "Model must be provided",

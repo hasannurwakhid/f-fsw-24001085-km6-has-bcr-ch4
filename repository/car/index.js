@@ -3,16 +3,34 @@ const {
   manufacture,
   transmission,
   type,
+  option,
   option_transaction,
 } = require("../../models");
 const crypto = require("crypto");
 const { uploader } = require("../../helper/cloudinary");
 const { getData, setData, deleteData } = require("../../helper/redis");
 const path = require("path");
-const manufacture = require("../../models/manufacture");
 
 exports.getCars = async () => {
-  const data = await car.findAll();
+  const data = await car.findAll({
+    include: [
+      {
+        model: manufacture,
+      },
+      {
+        model: transmission,
+      },
+      {
+        model: type,
+      },
+      {
+        model: option_transaction,
+        include: {
+          model: option,
+        },
+      },
+    ],
+  });
   return data;
 };
 
@@ -41,10 +59,10 @@ exports.getCar = async (id) => {
         model: type,
       },
       {
-        model: type,
-      },
-      {
         model: option_transaction,
+        include: {
+          model: option,
+        },
       },
     ],
   });
@@ -62,15 +80,15 @@ exports.createCar = async (payload) => {
   // const data = await car.create(payload);
   // return data;
 
-  if (payload.photo) {
-    const { photo } = payload;
+  if (payload.image) {
+    const { image } = payload;
 
-    photo.publicId = crypto.randomBytes(16).toString("hex");
+    image.publicId = crypto.randomBytes(16).toString("hex");
 
-    photo.name = `${photo.publicId}${path.parse(photo.name).ext}`;
+    image.name = `${image.publicId}${path.parse(image.name).ext}`;
 
-    const imageUpload = await uploader(photo);
-    payload.photo = imageUpload.secure_url;
+    const imageUpload = await uploader(image);
+    payload.image = imageUpload.secure_url;
   }
 
   const data = await car.create(payload);
@@ -84,14 +102,29 @@ exports.createCar = async (payload) => {
 exports.updateCar = async (id, payload) => {
   const key = `cars:${id}`;
 
-  // update data to postgres
+  if (payload.image) {
+    // upload image to cloudinary
+    const { image } = payload;
+
+    // make unique filename -> 213123128uasod9as8djas
+    image.publicId = crypto.randomBytes(16).toString("hex");
+
+    // rename the file -> 213123128uasod9as8djas.jpg / 213123128uasod9as8djas.png
+    image.name = `${image.publicId}${path.parse(image.name).ext}`;
+
+    // Process to upload image
+    const imageUpload = await uploader(image);
+    payload.image = imageUpload.secure_url;
+  }
+
+  // update to postgres
   await car.update(payload, {
     where: {
       id,
     },
   });
 
-  // get data from postgres
+  // get from postgres
   const data = await car.findAll({
     where: {
       id,
@@ -107,21 +140,18 @@ exports.updateCar = async (id, payload) => {
         model: type,
       },
       {
-        model: type,
-      },
-      {
         model: option_transaction,
       },
     ],
   });
   if (data.length > 0) {
-    // save to redis (cache)
+    // save to redis
     await setData(key, data[0], 300);
 
     return data[0];
   }
 
-  throw new Error(`Car is not found!`);
+  return data;
 };
 
 exports.deleteCar = async (id) => {

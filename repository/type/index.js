@@ -5,7 +5,11 @@ const { getData, setData, deleteData } = require("../../helper/redis");
 // const path = require("path");
 
 exports.getTypes = async () => {
-  const data = await type.findAll();
+  const data = await type.findAll({
+    include: {
+      model: car,
+    },
+  });
   return data;
 };
 

@@ -5,7 +5,16 @@ const { getData, setData, deleteData } = require("../../helper/redis");
 // const path = require("path");
 
 exports.getOptionTransactions = async () => {
-  const data = await option_transaction.findAll();
+  const data = await option_transaction.findAll({
+    include: [
+      {
+        model: car,
+      },
+      {
+        model: option,
+      },
+    ],
+  });
   return data;
 };
 
