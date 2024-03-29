@@ -27,11 +27,20 @@ exports.getCar = async (req, res, next) => {
 
 exports.createCar = async (req, res, next) => {
   try {
-    const { name, rent_day, size} = req.body;
-    const {photo} = req.files
-    if (!name || name == "") {
+    const {
+      model,
+      rent_day,
+      description,
+      year,
+      capacity,
+      transmission_id,
+      type_id,
+      manufacture_id,
+    } = req.body;
+    const { image } = req.files;
+    if (!model || model == "") {
       return next({
-        message: "Name must be provided",
+        message: "Model must be provided",
         statusCode: 400,
       });
     }
@@ -41,18 +50,53 @@ exports.createCar = async (req, res, next) => {
         statusCode: 400,
       });
     }
-    if (!size || size == "") {
+    if (!description || description == "") {
       return next({
-        message: "Size must be provided",
+        message: "Description must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!year || year == "") {
+      return next({
+        message: "Year must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!capacity || capacity == "") {
+      return next({
+        message: "Capacity must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!transmission_id || transmission_id == "") {
+      return next({
+        message: "Transmission ID must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!type_id || type_id == "") {
+      return next({
+        message: "Type ID must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!manufacture_id || manufacture_id == "") {
+      return next({
+        message: "Mescription must be provided",
         statusCode: 400,
       });
     }
 
     const data = await carUsecase.createCar({
-      name,
+      model,
+      image,
       rent_day,
-      size,
-      photo,
+      description,
+      year,
+      capacity,
+      transmission_id,
+      type_id,
+      manufacture_id,
     });
 
     res.status(201).json({
@@ -67,10 +111,19 @@ exports.createCar = async (req, res, next) => {
 exports.updateCar = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { name, rent_day, size, photo } = req.body;
-    if (!name || name == "") {
+    const {
+      model,
+      rent_day,
+      description,
+      year,
+      capacity,
+      transmission_id,
+      type_id,
+      manufacture_id,
+    } = req.body;
+    if (!model || model == "") {
       return next({
-        message: "Name must be provided",
+        message: "Model must be provided",
         statusCode: 400,
       });
     }
@@ -80,18 +133,53 @@ exports.updateCar = async (req, res, next) => {
         statusCode: 400,
       });
     }
-    if (!size || size == "") {
+    if (!description || description == "") {
       return next({
-        message: "Size must be provided",
+        message: "Description must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!year || year == "") {
+      return next({
+        message: "Year must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!capacity || capacity == "") {
+      return next({
+        message: "Capacity must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!transmission_id || transmission_id == "") {
+      return next({
+        message: "Transmission ID must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!type_id || type_id == "") {
+      return next({
+        message: "Type ID must be provided",
+        statusCode: 400,
+      });
+    }
+    if (!manufacture_id || manufacture_id == "") {
+      return next({
+        message: "Mescription must be provided",
         statusCode: 400,
       });
     }
 
     const data = await carUsecase.updateCar(id, {
-      name,
+      model,
+      image,
       rent_day,
-      size,
-      photo,
+      description,
+      year,
+      capacity,
+      transmission_id,
+      type_id,
+      manufacture_id,
     });
 
     res.status(201).json({
