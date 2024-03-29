@@ -1,16 +1,16 @@
-const { manufacture, car } = require("../../models");
+const { option } = require("../../models");
 // const crypto = require("crypto");
 // const { uploader } = require("../../helper/cloudinary");
 const { getData, setData, deleteData } = require("../../helper/redis");
 // const path = require("path");
 
-exports.getManufactures = async () => {
-  const data = await manufacture.findAll();
+exports.getOptions = async () => {
+  const data = await option.findAll();
   return data;
 };
 
-exports.getManufacture = async (id) => {
-  const key = `manufactures:${id}`;
+exports.getOption = async (id) => {
+  const key = `options:${id}`;
 
   // check redis and if there are any data return data from redis
   let data = await getData(key);
@@ -19,12 +19,9 @@ exports.getManufacture = async (id) => {
   }
 
   // if in the redis not found, we will get from database (postgres) and then save it to redis
-  data = await manufacture.findAll({
+  data = await option.findAll({
     where: {
       id,
-    },
-    include: {
-      model: car,
     },
   });
   if (data.length > 0) {
@@ -34,37 +31,34 @@ exports.getManufacture = async (id) => {
     return data[0];
   }
 
-  throw new Error(`Manufacture is not found!`);
+  throw new Error(`Option is not found!`);
 };
 
-exports.createManufacture = async (payload) => {
+exports.createOption = async (payload) => {
   // Create data to postgres
-  const data = await manufacture.create(payload);
+  const data = await option.create(payload);
 
   // Save to redis (cache)
-  const key = `manufactures:${data.id}`;
+  const key = `options:${data.id}`;
   await setData(key, data, 300);
 
   return data;
 };
 
-exports.updateManufacture = async (id, payload) => {
-  const key = `manufactures:${id}`;
+exports.updateOption = async (id, payload) => {
+  const key = `options:${id}`;
 
   // update data to postgres
-  await manufacture.update(payload, {
+  await option.update(payload, {
     where: {
       id,
     },
   });
 
   // get data from postgres
-  const data = await manufacture.findAll({
+  const data = await option.findAll({
     where: {
       id,
-    },
-    include: {
-      model: car,
     },
   });
   if (data.length > 0) {
@@ -74,14 +68,14 @@ exports.updateManufacture = async (id, payload) => {
     return data[0];
   }
 
-  throw new Error(`Manufacture is not found!`);
+  throw new Error(`Option is not found!`);
 };
 
-exports.deleteManufacture = async (id) => {
-  const key = `manufactures:${id}`;
+exports.deleteOption = async (id) => {
+  const key = `options:${id}`;
 
   // delete from postgres
-  await manufacture.destroy({ where: { id } });
+  await option.destroy({ where: { id } });
 
   // delete from redis
   await deleteData(key);
