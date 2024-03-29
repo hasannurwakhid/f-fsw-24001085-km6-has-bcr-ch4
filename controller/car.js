@@ -1,4 +1,4 @@
-const carUsecase = require("../usecase/cars");
+const carUsecase = require("../usecase/car");
 
 exports.getCars = async (req, res, next) => {
   try {

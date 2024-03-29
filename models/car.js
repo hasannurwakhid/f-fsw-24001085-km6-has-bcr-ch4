@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       car.belongsTo(models.transmission, { foreignKey: "transmission_id" });
       car.belongsTo(models.type, { foreignKey: "type_id" });
-      car.belongsTo(models.type, { foreignKey: "manufacture_id" });
+      car.belongsTo(models.manufacture, { foreignKey: "manufacture_id" });
     }
   }
   car.init(
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       //   defaultValue: DataTypes.UUIDV4 // Untuk mengisi kolom ID dengan UUID secara otomatis
       // },
       model: DataTypes.STRING,
-      manufactur_id: DataTypes.INTEGER,
+      manufacture_id: DataTypes.INTEGER,
       image: DataTypes.TEXT,
       rent_day: DataTypes.BIGINT,
       description: DataTypes.TEXT,

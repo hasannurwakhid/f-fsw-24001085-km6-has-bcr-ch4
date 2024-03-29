@@ -1,4 +1,4 @@
-const carRepo = require("../../repository/cars");
+const carRepo = require("../../repository/car");
 
 exports.getCars = async () => {
   const data = await carRepo.getCars();
