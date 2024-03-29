@@ -15,10 +15,16 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      manufactur_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
+      // manufactur_id: {
+      //   allowNull: false,
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: {
+      //       tableName: manufactures
+      //     },
+      //     key: id
+      //   }
+      // },
       image: {
         allowNull: true,
         type: Sequelize.TEXT,
