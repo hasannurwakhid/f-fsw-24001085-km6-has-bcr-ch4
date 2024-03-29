@@ -1,15 +1,15 @@
-const { type, car } = require("../../models");
+const { manufacture, car } = require("../../models");
 // const crypto = require("crypto");
 // const { uploader } = require("../../helper/cloudinary");
 const { getData, setData, deleteData } = require("../../helper/redis");
 // const path = require("path");
 
-exports.getTypes = async () => {
-  const data = await type.findAll();
+exports.getManufactures = async () => {
+  const data = await manufacture.findAll();
   return data;
 };
 
-exports.getType = async (id) => {
+exports.getManufacture = async (id) => {
   const key = `types:${id}`;
 
   // check redis and if there are any data return data from redis
@@ -19,7 +19,7 @@ exports.getType = async (id) => {
   }
 
   // if in the redis not found, we will get from database (postgres) and then save it to redis
-  data = await type.findAll({
+  data = await manufacture.findAll({
     where: {
       id,
     },
@@ -34,12 +34,12 @@ exports.getType = async (id) => {
     return data[0];
   }
 
-  throw new Error(`Type is not found!`);
+  throw new Error(`Manufacture is not found!`);
 };
 
-exports.createType = async (payload) => {
+exports.createManufacture = async (payload) => {
   // Create data to postgres
-  const data = await type.create(payload);
+  const data = await manufacture.create(payload);
 
   // Save to redis (cache)
   const key = `types:${data.id}`;
@@ -48,18 +48,18 @@ exports.createType = async (payload) => {
   return data;
 };
 
-exports.updateType = async (id, payload) => {
+exports.updateManufacture = async (id, payload) => {
   const key = `types:${id}`;
 
   // update data to postgres
-  await type.update(payload, {
+  await manufacture.update(payload, {
     where: {
       id,
     },
   });
 
   // get data from postgres
-  const data = await type.findAll({
+  const data = await manufacture.findAll({
     where: {
       id,
     },
@@ -74,14 +74,14 @@ exports.updateType = async (id, payload) => {
     return data[0];
   }
 
-  throw new Error(`Type is not found!`);
+  throw new Error(`Manufacture is not found!`);
 };
 
-exports.deleteType = async (id) => {
+exports.deleteManufacture = async (id) => {
   const key = `types:${id}`;
 
   // delete from postgres
-  await type.destroy({ where: { id } });
+  await manufacture.destroy({ where: { id } });
 
   // delete from redis
   await deleteData(key);
