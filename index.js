@@ -22,6 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(expressLayouts);
 
 app.use("/api", router);
+app.use("/dashboard", router);
+
 
 app.use((err, req, res, next) => {
   let statusCode = 500;

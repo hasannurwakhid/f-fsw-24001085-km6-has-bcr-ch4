@@ -155,7 +155,7 @@ module.exports = {
     await queryInterface.bulkInsert("cars", [
       {
         model: "F150",
-        image: "",
+        image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1711740457/ff2323359359ae53837f2c853a6124b6.jpg`,
         rent_day: 200000,
         description:
           "Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
@@ -169,7 +169,7 @@ module.exports = {
       },
       {
         model: "X5",
-        image: "",
+        image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1711740457/ff2323359359ae53837f2c853a6124b6.jpg`,
         rent_day: 800000,
         description:
           "Rear passenger map pockets. Electrochromic rearview mirror. Dual chrome exhaust tips. Locking glove box",
