@@ -10,6 +10,8 @@ const spec = require("./spec");
 const specTransaction = require("./spec_transaction");
 
 const dashboardListCar = require("./dashboardListCar");
+const addNewCar = require("./addNewCar");
+
 
 router.use("/cars", car);
 router.use("/transmissions", transmission);
@@ -21,5 +23,7 @@ router.use("/specs", spec);
 router.use("/spec-transactions", specTransaction);
 
 router.use("/list-cars", dashboardListCar);
+router.use("/addNewCar", addNewCar);
+
 
 module.exports = router;

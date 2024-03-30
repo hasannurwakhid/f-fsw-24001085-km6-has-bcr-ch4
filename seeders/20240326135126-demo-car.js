@@ -181,6 +181,20 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        model: "MKZ",
+        image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1711740457/ff2323359359ae53837f2c853a6124b6.jpg`,
+        rent_day: 900000,
+        description:
+          "Driver & front passenger map pockets. Direct-type tire pressure monitor system. Cargo area lamp. Glove box lamp.",
+        year: 2021,
+        capacity: 6,
+        transmission_id: 3,
+        type_id: 3,
+        manufacture_id: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
 
     await queryInterface.bulkInsert("option_transactions", [

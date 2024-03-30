@@ -5,8 +5,6 @@ const router = require("./route");
 const expressLayouts = require("express-ejs-layouts");
 const fileUpload = require("express-fileupload");
 
-
-
 const app = express();
 const port = 3000;
 
