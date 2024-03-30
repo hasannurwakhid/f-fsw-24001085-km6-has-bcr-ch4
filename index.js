@@ -6,6 +6,7 @@ const expressLayouts = require("express-ejs-layouts");
 const fileUpload = require("express-fileupload");
 
 
+
 const app = express();
 const port = 3000;
 
@@ -23,7 +24,6 @@ app.use(expressLayouts);
 
 app.use("/api", router);
 app.use("/dashboard", router);
-
 
 app.use((err, req, res, next) => {
   let statusCode = 500;

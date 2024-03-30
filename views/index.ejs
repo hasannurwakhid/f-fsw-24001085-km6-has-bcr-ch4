@@ -53,9 +53,10 @@
             </div>
             <div class="row mt-auto">
               <div class="col-md-6 d-flex mt-2">
-                <form class="flex-fill d-flex" action="/dashboard/list-cars" method="delete">
+                <form class="flex-fill d-flex" action="" method="">
                   <button
-                    class="btn flex-fill d-flex align-items-center justify-content-center border-danger text-danger"
+                    class="btn flex-fill d-flex align-items-center justify-content-center border-danger text-danger delete-button"
+                    data-url="/dashboard/list-cars/<%= car.id %>"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     type="button"
@@ -137,16 +138,36 @@
             </button>
           </div>
           <div class="col-md-3 d-flex">
-            <button
-              type="button"
-              class="btn flex-fill text-white"
-              style="background-color: #0d28a6"
+            <form
+              class="flex-fill d-flex"
+              id="deleteForm"
+              action=""
+              method="POST"
             >
-              Ya
-            </button>
+              <input type="hidden" name="_method" value="DELETE" />
+              <button
+                type="submit"
+                class="btn flex-fill text-white"
+                style="background-color: #0d28a6"
+              >
+                Ya
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  const deleteButtons = document.querySelectorAll(".delete-button");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const form = document.querySelector("#deleteForm");
+      const url = this.dataset.url;
+      form.action = url;
+      $("#exampleModal").modal("show");
+    });
+  });
+</script>

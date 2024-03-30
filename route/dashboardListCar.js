@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const dashboardListCarController = require("../controller/dashboardListCar");
 
-router.get("/", dashboardListCarController.tampilHalaman);
-// router.post("/", dashboardListCarController.searchCar);
+router.route("/").get(dashboardListCarController.tampilHalaman);
+router.route("/:id").post(dashboardListCarController.deleteCar);
 
 module.exports = router;
