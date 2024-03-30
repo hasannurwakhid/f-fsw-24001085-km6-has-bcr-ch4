@@ -5,6 +5,8 @@ const {
   type,
   option,
   option_transaction,
+  spec,
+  spec_transaction,
 } = require("../../models");
 const crypto = require("crypto");
 const { uploader } = require("../../helper/cloudinary");
@@ -27,6 +29,12 @@ exports.getCars = async () => {
         model: option_transaction,
         include: {
           model: option,
+        },
+      },
+      {
+        model: spec_transaction,
+        include: {
+          model: spec,
         },
       },
     ],
@@ -62,6 +70,12 @@ exports.getCar = async (id) => {
         model: option_transaction,
         include: {
           model: option,
+        },
+      },
+      {
+        model: spec_transaction,
+        include: {
+          model: spec,
         },
       },
     ],
@@ -143,6 +157,12 @@ exports.updateCar = async (id, payload) => {
         model: option_transaction,
         include: {
           model: option,
+        },
+      },
+      {
+        model: spec_transaction,
+        include: {
+          model: spec,
         },
       },
     ],
