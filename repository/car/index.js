@@ -141,6 +141,9 @@ exports.updateCar = async (id, payload) => {
       },
       {
         model: option_transaction,
+        include: {
+          model: option,
+        },
       },
     ],
   });
