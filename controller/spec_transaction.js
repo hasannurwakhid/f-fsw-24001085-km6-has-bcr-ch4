@@ -27,16 +27,16 @@ exports.getSpecTransaction = async (req, res, next) => {
 
 exports.createSpecTransaction = async (req, res, next) => {
   try {
-    const { car_id, option_id } = req.body;
+    const { car_id, spec_id } = req.body;
     if (!car_id || car_id == "") {
       return next({
         message: "Car ID must be provided",
         statusCode: 400,
       });
     }
-    if (!option_id || option_id == "") {
+    if (!spec_id || spec_id == "") {
       return next({
-        message: "Option ID must be provided",
+        message: "Spesification ID must be provided",
         statusCode: 400,
       });
     }
@@ -58,16 +58,16 @@ exports.createSpecTransaction = async (req, res, next) => {
 exports.updateSpecTransaction = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { car_id, option_id } = req.body;
+    const { car_id, spec_id } = req.body;
     if (!car_id || car_id == "") {
       return next({
         message: "Car ID must be provided",
         statusCode: 400,
       });
     }
-    if (!option_id || option_id == "") {
+    if (!spec_id || spec_id == "") {
       return next({
-        message: "Option ID must be provided",
+        message: "Spesification ID must be provided",
         statusCode: 400,
       });
     }
