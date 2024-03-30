@@ -194,7 +194,7 @@
                     <form class="flex-fill d-flex" action="" method="">
                       <button
                         type="button"
-                        class="btn flex-fill d-flex align-items-center justify-content-center border-danger text-danger"
+                        class="btn flex-fill d-flex align-items-center justify-content-center border-danger text-danger delete-button"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                       >
@@ -343,13 +343,18 @@
                 </button>
               </div>
               <div class="col-md-3 d-flex">
-                <button
-                  type="button"
-                  class="btn flex-fill text-white"
-                  style="background-color: #0d28a6"
-                >
-                  Ya
-                </button>
+                <form action="">
+                  <button
+                    id="deleteForm"
+                    action=""
+                    method="POST"
+                    type="submit"
+                    class="btn flex-fill text-white"
+                    style="background-color: #0d28a6"
+                  >
+                    Ya
+                  </button>
+                </form>
               </div>
             </div>
           </div>
